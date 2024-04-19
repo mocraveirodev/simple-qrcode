@@ -1,66 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# QR Code Generator API Documentation ✅
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the QR Code Generator API! This API allows you to create QR codes dynamically by using the Laravel 11 framework. The `/qr-code` endpoint accepts query parameters to customize your QR code based on size and data.
 
-## About Laravel
+## Endpoint
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**GET** `/qr-code`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Query Parameters
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   `size` (required): Integer specifying the size of the QR code in pixels. Must be between 10 and 1000.
+-   `data` (required): String containing the data to be encoded into the QR code. This can be plain text or structured data with special prefixes for different functionalities as described below.
 
-## Learning Laravel
+### Special Data Prefixes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Depending on the prefix of the `data` parameter, the QR code will represent different types of information:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Usage | Prefix | Example |
+| --- | --- | --- |
+| Website URL | http:// | http://www.google.com/ |
+| Secured URL | https:// | https://www.google.com/ |
+| E-mail Address | mailto: | mailto:janedoe@email.com |
+| Phone Number | tel: | tel:555-555-5555 |
+| Text (SMS) | sms: | sms:555-555-5555 |
+| Text (SMS) With Pretyped Message | sms: | sms::I am a pretyped message |
+| Text (SMS) With Pretyped Message and Number | sms: | sms:555-555-5555:I am a pretyped message |
+| Geo Address | geo: | geo:-78.400364,-85.916993 |
+| MeCard | mecard: | MECARD:Jane, Doe;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:janedoe@email.com; |
+| VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
+| Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
-## Laravel Sponsors
+### Usage Example
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Request:**
+ ```js
+ GET /qr-code?size=200&data=https://www.google.com
+ ```
+ 
+**Response:**
+```plaintext
+(QR code image is returned based on the specified parameters)
+``` 
 
-### Premium Partners
+## Getting Started
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1.  **Base URL**: Ensure you know the base URL where the API is hosted. The endpoint mentioned above will be appended to this base URL.
+    
+2.  **Query Parameters**: Include `size` and `data` parameters in your request according to the requirements stated above.
+    
+3.  **Error Handling**: The API is designed to communicate specific issues in the request parameters with clear error messages, helping clients to quickly diagnose and fix issues in their API requests. Below are the common error messages that you might encounter:
 
-## Contributing
+-   **size.required:** 'A size is required'
+    
+    -   This error occurs when the `size` parameter is not included in the request. Ensure that you specify a size value when you make a request.
+-   **size.integer:** 'A size has to be a number'
+    
+    -   This error indicates that the `size` parameter is not a valid integer. Please ensure that you provide a numerical value for size.
+-   **size.min:** 'A minimum size is 10'
+    
+    -   This message is returned when the value specified in the `size` parameter is less than the minimum allowed size of 10 pixels. Adjust your request to meet this minimum size requirement.
+-   **size.max:** 'A maximum size is 1000'
+    
+    -   This error is displayed when the `size` parameter exceeds the maximum limit of 1000 pixels. Ensure that your size value does not surpass this limit.
+-   **data.required:** 'A data is required'
+    
+    -   This error occurs when the `data` parameter is missing in the request. The `data` parameter is essential for generating the QR code, so make sure to include it.
+    
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Contribution
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Feel free to fork this repository and submit pull requests to enhance the functionalities of the QR Code Generator API. Bug reports and feature requests are welcome. Please use the issue tracker for any questions or concerns.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Contact
+
+For support or to contact the developer, please send an email to craveiromonica@gmail.com.
+
+----------
+Feito por Monica Craveiro 💜
