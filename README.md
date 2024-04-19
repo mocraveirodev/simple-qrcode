@@ -80,4 +80,4 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 For support or to contact the developer, please send an email to craveiromonica@gmail.com.
 
 ----------
-Feito por Monica Craveiro 💜
+Made by Monica Craveiro 💜
