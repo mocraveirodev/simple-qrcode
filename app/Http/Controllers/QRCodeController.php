@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\QrCodeRequest;
 
 class QRCodeController extends Controller
 {
-    public function index(Request $request)
+    public function index(QrCodeRequest $request)
     {
-            return view('qrcode', $request->all());
+        return view('qrcode', $request->validated());
     }
 }
