@@ -6,7 +6,7 @@ use App\Http\Controllers\QRCodeController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('qrcode');
 });
 
 Route::get('/qr-code', [QRCodeController::class, 'index'])
