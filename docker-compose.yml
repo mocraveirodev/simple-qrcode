@@ -11,16 +11,13 @@ services:
         depends_on:
             - db
     db:
-        image: 'mysql/mysql-server:8.0'
+        image: 'postgres:latest'
         ports:
-            - '3306:3306'
+            - '5432:5432'
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            POSTGRES_DB: '${DB_DATABASE}' # Configuração do banco de dados
+            POSTGRES_USER: '${DB_USERNAME}' # Configuração do usuário
+            POSTGRES_PASSWORD: '${DB_PASSWORD}' # Configuração da senha
         volumes:
             - db_data:/var/lib/mysql
 volumes:
