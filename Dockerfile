@@ -1,34 +1,20 @@
-FROM php:8.3-apache
-
-RUN apt-get update && apt-get install -y \
-    git \
-    zip \
-    unzip \
-    wget \
-    zlib1g-dev \
-    libpng-dev \
-    libpq-dev \
-    postgresql-client \
-    && docker-php-ext-install pdo_mysql pdo_pgsql pgsql gd \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN wget -O /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-    chmod +x /usr/local/bin/wait-for-it.sh
-
-RUN a2enmod rewrite
-
-WORKDIR /var/www/html
+FROM richarvey/nginx-php-fpm:3.1.6
 
 COPY . .
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-RUN composer install
+# Laravel config
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
 
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-EXPOSE 8000
-
-CMD ["bash", "-c", "/usr/local/bin/wait-for-it.sh db:3306 -- php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["/start.sh"]

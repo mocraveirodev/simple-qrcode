@@ -15,9 +15,9 @@ services:
         ports:
             - '5432:5432'
         environment:
-            POSTGRES_DB: '${DB_DATABASE}' # Configuração do banco de dados
-            POSTGRES_USER: '${DB_USERNAME}' # Configuração do usuário
-            POSTGRES_PASSWORD: '${DB_PASSWORD}' # Configuração da senha
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
         volumes:
             - db_data:/var/lib/mysql
 volumes:
