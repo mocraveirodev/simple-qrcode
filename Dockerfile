@@ -38,4 +38,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 EXPOSE 8000
 
 # Comando de inicialização do servidor web
-CMD ["apache2-foreground"]
+CMD ["bash", "-c", "/usr/local/bin/wait-for-it.sh db:3306 -- php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
