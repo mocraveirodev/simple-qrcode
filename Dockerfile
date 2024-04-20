@@ -24,7 +24,7 @@ COPY . .
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install --prefer-dist --no-dev && php artisan key:generate && php artisan config:cache && php artisan route:cache && php artisan view:cache
+RUN composer install
 
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
