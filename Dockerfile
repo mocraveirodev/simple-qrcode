@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libpq-dev \
     postgresql-client \
-    && docker-php-ext-install pdo_mysql pdo_pgsql gd \
-    && docker-php-ext-install pdo_mysql gd \
+    && docker-php-ext-install pdo_mysql pdo_pgsql pgsql gd \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
