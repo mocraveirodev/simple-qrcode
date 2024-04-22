@@ -1,10 +1,10 @@
 # QR Code Generator API Documentation ✅
 
-Welcome to the QR Code Generator API! This API allows you to create QR codes dynamically by using the Laravel 11 framework. The `/qr-code` endpoint accepts query parameters to customize your QR code based on size and data.
+Welcome to the QR Code Generator API! This API allows you to create QR codes dynamically by using the Laravel 11 framework. The `/api/qr-code` endpoint accepts query parameters to customize your QR code based on size and data.
 
 ## Endpoint
 
-**GET** `/qr-code`
+**GET** `/api/qr-code`
 
 ### Query Parameters
 
@@ -33,8 +33,8 @@ Depending on the prefix of the `data` parameter, the QR code will represent diff
 ### Usage Example
 
 **Request:**
- ```js
- GET /qr-code?size=200&data=https://www.google.com
+ ```http
+ GET /api/qr-code?size=200&data=https://www.google.com
  ```
  
 **Response:**
