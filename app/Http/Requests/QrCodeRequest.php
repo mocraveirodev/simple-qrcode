@@ -26,20 +26,4 @@ class QrCodeRequest extends FormRequest
             'data' => 'required'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'size.required' => 'A size is required',
-            'size.integer' => 'A size have to be a number',
-            'size.min' => 'A minumun size is 10',
-            'size.max' => 'A maximum size is 1000',
-            'data.required' => 'A data is required',
-        ];
-    }
 }
