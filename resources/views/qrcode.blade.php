@@ -35,7 +35,14 @@
             </div>
         </div>
     @else
-        {!! QrCode::margin(1)->size($size)->generate($data); !!}
+        <img src="data:image/png;base64, {!! 
+            base64_encode(
+                QrCode::format('png')
+                    ->margin(1)
+                    ->size($size)
+                    ->generate($data)
+            )
+        !!}" alt="QR Code">
     @endif
 </body>
 </html>

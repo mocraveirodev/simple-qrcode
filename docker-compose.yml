@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-            - '8000:8000'
+            - '80:80'
         volumes:
             - '.:/var/www/html'
         depends_on:
@@ -19,6 +19,6 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD}'
         volumes:
-            - db_data:/var/lib/mysql
+            - db_data:/var/lib/postgresql/data  # Corrigido o volume para PostgreSQL
 volumes:
     db_data:
