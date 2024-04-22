@@ -22,7 +22,7 @@ class QrCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'size' => 'bail|required|integer|min:10|max:1000',
+            'size' => 'bail|required|numeric|integer|min:10|max:1000',
             'data' => 'required'
         ];
     }
