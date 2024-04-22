@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
     app:
         build:
@@ -19,6 +19,6 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD}'
         volumes:
-            - db_data:/var/lib/postgresql/data  # Corrigido o volume para PostgreSQL
+            - db_data:/var/lib/postgresql/data
 volumes:
     db_data:
