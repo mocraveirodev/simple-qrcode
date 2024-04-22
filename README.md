@@ -42,6 +42,12 @@ Depending on the prefix of the `data` parameter, the QR code will represent diff
 (QR code image is returned based on the specified parameters)
 ``` 
 
+### Web Version
+Additionally, there is a web version of the QR Code Generator with the same requirements, but the /api prefix is omitted from the endpoint.
+
+### Demo
+Check out our online demo at https://simple-qrcode-zsg4.onrender.com to see the QR Code Generator API in action!
+
 ## Getting Started
 
 1.  **Base URL**: Ensure you know the base URL where the API is hosted. The endpoint mentioned above will be appended to this base URL.
@@ -50,19 +56,22 @@ Depending on the prefix of the `data` parameter, the QR code will represent diff
     
 3.  **Error Handling**: The API is designed to communicate specific issues in the request parameters with clear error messages, helping clients to quickly diagnose and fix issues in their API requests. Below are the common error messages that you might encounter:
 
--   **size.required:** 'A size is required'
+-   **size.required:** 'The size field is required.'
     
     -   This error occurs when the `size` parameter is not included in the request. Ensure that you specify a size value when you make a request.
--   **size.integer:** 'A size has to be a number'
+-   **size.numeric:** 'The size field must be a number'
+    
+    -   This error indicates that the `size` parameter is not a valid number. Please ensure that you provide a numerical value for size.
+-   **size.integer:** 'The size field must be an integer'
     
     -   This error indicates that the `size` parameter is not a valid integer. Please ensure that you provide a numerical value for size.
--   **size.min:** 'A minimum size is 10'
+-   **size.min:** 'The size field must be at least 10'
     
     -   This message is returned when the value specified in the `size` parameter is less than the minimum allowed size of 10 pixels. Adjust your request to meet this minimum size requirement.
--   **size.max:** 'A maximum size is 1000'
+-   **size.max:** 'The size field must not be greater than 1000'
     
     -   This error is displayed when the `size` parameter exceeds the maximum limit of 1000 pixels. Ensure that your size value does not surpass this limit.
--   **data.required:** 'A data is required'
+-   **data.required:** 'The data field is required'
     
     -   This error occurs when the `data` parameter is missing in the request. The `data` parameter is essential for generating the QR code, so make sure to include it.
     
